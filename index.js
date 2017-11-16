@@ -96,9 +96,9 @@ const getShowtimes = (_theaterId) => {
 
 }
 
-// bot.on('message',function(event){
-//           event.reply(showtimePromise);
-//         });
+bot.on('message',function(event){
+          event.reply(showtimePromise);
+        });
 // import Crawler from 'js-crawler'
 // import Cheerio from 'cheerio'
 // import _ from 'lodash'
