@@ -138,6 +138,7 @@ var server = app.listen(process.env.PORT || 8080, function() {
 
 // function _japan() {
   // clearTimeout(timer2);
+var jp = function(){
   request({
     url: "http://www.vscinemas.com.tw/visPrintShowTimes.aspx?cid=TP&visLang=2",
     method: "GET"
@@ -171,7 +172,7 @@ var server = app.listen(process.env.PORT || 8080, function() {
        //   });
       }
   });
-// }
+}
 
 
 
