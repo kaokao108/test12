@@ -147,10 +147,10 @@ var server = app.listen(process.env.PORT || 8080, function() {
     } else {
       var $ = cheerio.load(body);
       var result = [];
-      var target = $("table.PrintShowTimesFilm td");
-       for(var i=0;i<target.length;i++) {
+      var target = $("table.PrintShowTimesFilm colspan");
+      for(var i=0;i<target.length;i++) {
       result.push($(target[i]).text());
-    }
+       }
       // var target2 = $(".PrintShowTimesDay");
       // var target3 = $(".PrintShowTimesSession")
       // console.log(target[14].children[0].data);
