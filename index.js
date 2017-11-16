@@ -151,7 +151,7 @@ var server = app.listen(process.env.PORT || 8080, function() {
       // var target3 = $(".PrintShowTimesSession")
       // console.log(target[14].children[0].data);
       // var showtimes = []
-      var movie = target[0].children[0].data;
+      var movie = target[0].children[1].data;
       // var movie2 = target2[0].children[0].data;
       // var movie3 = target3[0].children[0].data;
       // for(var i=0 ; i<titles.length ; i++) {
