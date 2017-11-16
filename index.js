@@ -35,65 +35,66 @@ var server = app.listen(process.env.PORT || 8080, function() {
 });
 
 
-// const getShowtimes = (_theaterId) => {
-//   const crawler = new Crawler().configure({ maxRequestsPerSecond: 10 })
-//   const showtimePromise = new Promise((resolve, reject) => {
-//     crawler.crawl({
-//       url: `http://www.vscinemas.com.tw/visPrintShowTimes.aspx?cid=${_theaterId}&visLang=2`,
-//       success: (page) => {
-//         const html = page.content.toString()
-//         const $ = Cheerio.load(html)
-//         let tables = $('.PrintShowTimesFilm').parent().parent().parent().find('table')
-//         let showtimes = []
-//         _.map(tables, (table, idx) => {
-//           let title = $(table).find('.PrintShowTimesFilm').text()
-//           const showtimesDay = _getShowtimesDay($(table))
-//           let cinemaType = []
-//           let rating = ''
-//           let label = ''
-//           if (title.indexOf('普遍級') > 0) {
-//             rating = 'G'
-//           } else if (title.indexOf('保護級') > 0) {
-//             rating = 'PG'
-//           } else if (title.indexOf('輔12級') > 0) {
-//             rating = 'PG 12'
-//           } else if (title.indexOf('輔15級') > 0) {
-//             rating = 'PG 15'
-//           } else if (title.indexOf('限制級') > 0) {
-//             rating = 'R'
-//           }
-//           title = title.replace(/\(普遍級\)|\(保護級\)|\(輔12級\)|\(輔15級\)|\(限制級\)|/g, '')
-//           let originalTitle = title.trim().replace(/ /g, '')
+const getShowtimes = (_theaterId) => {
+  const js-crawler = require('js-crawler');
+  const crawler = new Crawler().configure({ maxRequestsPerSecond: 10 })
+  const showtimePromise = new Promise((resolve, reject) => {
+    crawler.crawl({
+      url: `http://www.vscinemas.com.tw/visPrintShowTimes.aspx?cid=${_theaterId}&visLang=2`,
+      success: (page) => {
+        const html = page.content.toString()
+        const $ = Cheerio.load(html)
+        let tables = $('.PrintShowTimesFilm').parent().parent().parent().find('table')
+        let showtimes = []
+        _.map(tables, (table, idx) => {
+          let title = $(table).find('.PrintShowTimesFilm').text()
+          const showtimesDay = _getShowtimesDay($(table))
+          let cinemaType = []
+          let rating = ''
+          let label = ''
+          if (title.indexOf('普遍級') > 0) {
+            rating = 'G'
+          } else if (title.indexOf('保護級') > 0) {
+            rating = 'PG'
+          } else if (title.indexOf('輔12級') > 0) {
+            rating = 'PG 12'
+          } else if (title.indexOf('輔15級') > 0) {
+            rating = 'PG 15'
+          } else if (title.indexOf('限制級') > 0) {
+            rating = 'R'
+          }
+          title = title.replace(/\(普遍級\)|\(保護級\)|\(輔12級\)|\(輔15級\)|\(限制級\)|/g, '')
+          let originalTitle = title.trim().replace(/ /g, '')
 
-//           // filter cinemaType
-//           label = title.split('\)')[0]
-//           title = title.split('\)')[1].replace(/ /g, '')
-//           cinemaType = _getCinemaType(label)
-//           showtimes.push({
-//             title: {
-//               original: originalTitle,
-//               zh_tw:title,
-//             },
-//             rating,
-//             cinemaType: _.uniq(cinemaType),
-//             showtimesDay,
-//             movieId: null,
-//             poster: null
-//           })
+          // filter cinemaType
+          label = title.split('\)')[0]
+          title = title.split('\)')[1].replace(/ /g, '')
+          cinemaType = _getCinemaType(label)
+          showtimes.push({
+            title: {
+              original: originalTitle,
+              zh_tw:title,
+            },
+            rating,
+            cinemaType: _.uniq(cinemaType),
+            showtimesDay,
+            movieId: null,
+            poster: null
+          })
 
-//         })
-//         resolve(showtimes)
+        })
+        resolve(showtimes)
 
-//       },
-//       failure: (page) => {
-//         console.log(`Get Showtimes Failed on theater: ${_theaterId}`)
-//         reject([])
-//       }
-//     })
-//   })
-//   return showtimePromise
+      },
+      failure: (page) => {
+        console.log(`Get Showtimes Failed on theater: ${_theaterId}`)
+        reject([])
+      }
+    })
+  })
+  return showtimePromise
 
-// }
+}
 
 // bot.on('message',function(event){
 //           event.reply(showtimePromise);
@@ -128,35 +129,35 @@ var server = app.listen(process.env.PORT || 8080, function() {
 
 // function _japan() {
   // clearTimeout(timer2);
-  request({
-    url: "http://www.vscinemas.com.tw/visPrintShowTimes.aspx?cid=TP&visLang=2",
-    method: "GET"
-  }, function(error, response, body) {
-    if (error || !body) {
-      return;
-    } else {
-      var $ = cheerio.load(body);
-      var target = $(".PrintShowTimesFilm");
-      // var target2 = $(".PrintShowTimesDay");
-      // var target3 = $(".PrintShowTimesSession")
-      // console.log(target[14].children[0].data);
-      // var showtimes = []
-      var movie = target[0].children[0].data;
-      // var movie2 = target2[0].children[0].data;
-      // var movie3 = target3[0].children[0].data;
-      // for(var i=0 ; i<titles.length ; i++) {
-      //   result.push($(titles[i]).text());
-      bot.on('message',function(event){
-          event.reply(movie);
-        });
-      // if (jp > 0) {
-       //  bot.on('message',function(event){
-       //    event.reply('電影'+ movie + movie2 + movie3);     
-       //  // });
-       // // resolve(showtimes)
-       //   });
-      }
-  });
+  // request({
+  //   url: "http://www.vscinemas.com.tw/visPrintShowTimes.aspx?cid=TP&visLang=2",
+  //   method: "GET"
+  // }, function(error, response, body) {
+  //   if (error || !body) {
+  //     return;
+  //   } else {
+  //     var $ = cheerio.load(body);
+  //     var target = $(".PrintShowTimesFilm");
+  //     // var target2 = $(".PrintShowTimesDay");
+  //     // var target3 = $(".PrintShowTimesSession")
+  //     // console.log(target[14].children[0].data);
+  //     // var showtimes = []
+  //     var movie = target[0].children[0].data;
+  //     // var movie2 = target2[0].children[0].data;
+  //     // var movie3 = target3[0].children[0].data;
+  //     // for(var i=0 ; i<titles.length ; i++) {
+  //     //   result.push($(titles[i]).text());
+  //     bot.on('message',function(event){
+  //         event.reply(movie);
+  //       });
+  //     // if (jp > 0) {
+  //      //  bot.on('message',function(event){
+  //      //    event.reply('電影'+ movie + movie2 + movie3);     
+  //      //  // });
+  //      // // resolve(showtimes)
+  //      //   });
+  //     }
+  // });
 // }
 
 
