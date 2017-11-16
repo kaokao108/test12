@@ -6,7 +6,7 @@ var apiai = require('apiai');
 var request = require('request');
 var cheerio = require("cheerio");
 var getJSON = require('get-json');
-// var js-crawler = require('js-crawler');
+var Crawler = require('js-crawler');
 var _ = require('lodash');
 var promise = require('promise');
 
@@ -36,7 +36,7 @@ var server = app.listen(process.env.PORT || 8080, function() {
 
 
 const getShowtimes = (_theaterId) => {
-  const js-crawler = require('js-crawler');
+  // const js-crawler = require('js-crawler');
   const crawler = new Crawler().configure({ maxRequestsPerSecond: 10 })
   const showtimePromise = new Promise((resolve, reject) => {
     crawler.crawl({
