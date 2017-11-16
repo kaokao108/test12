@@ -139,7 +139,7 @@ var server = app.listen(process.env.PORT || 8080, function() {
 // function _japan() {
   // clearTimeout(timer2);
   request({
-    url: "http://www.vscinemas.com.tw/visPrintShowTimes.aspx?cid=TP&visLang=2",
+    url: "http://www.atmovies.com.tw/showtime/t02a01/a02/",
     method: "GET"
   }, function(error, response, body) {
     if (error || !body) {
@@ -147,7 +147,7 @@ var server = app.listen(process.env.PORT || 8080, function() {
     } else {
       var $ = cheerio.load(body);
       var result = [];
-      var target = $("table.PrintShowTimesFilm colspan");
+      var target = $("li.filmTitle a");
       for(var i=0;i<target.length;i++) {
       result.push($(target[i]).text());
        }
