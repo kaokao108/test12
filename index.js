@@ -6,9 +6,9 @@ var apiai = require('apiai');
 var request = require('request');
 var cheerio = require("cheerio");
 var getJSON = require('get-json');
-var Crawler = require('js-crawler');
-var _ = require('lodash');
-var promise = require('promise');
+// var Crawler = require('js-crawler');
+// var _ = require('lodash');
+// var promise = require('promise');
 
 // var fs = require('fs'),
 
@@ -134,9 +134,9 @@ var server = app.listen(process.env.PORT || 8080, function() {
 //   });
 // }
 
-// _japan();
+_japan();
 
-// function _japan() {
+function _japan() {
   // clearTimeout(timer2);
 // var jp = function(){
   request({
@@ -199,7 +199,7 @@ var server = app.listen(process.env.PORT || 8080, function() {
 //       // timer2 = setInterval(_japan, 120000);
 //     }
 //   });
-// }
+}
 
 // function _bot() {
 //   bot.on('message', function(event) {
