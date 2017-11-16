@@ -6,7 +6,7 @@ var apiai = require('apiai');
 var request = require('request');
 var cheerio = require("cheerio");
 var getJSON = require('get-json');
-var js-crawler = require('js-crawler');
+// var js-crawler = require('js-crawler');
 var _ = require('lodash');
 var promise = require('promise');
 
