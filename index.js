@@ -84,9 +84,9 @@ var getShowtimes = (_theaterId) => {
 
         })
         resolve(showtimes)
-         bot.on('message',function(event){
-          event.reply(showtime);
-        });
+        //  bot.on('message',function(event){
+        //   event.reply(showtime);
+        // });
 
       },
       failure: function(page) => {
