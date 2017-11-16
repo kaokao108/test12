@@ -97,7 +97,7 @@ const getShowtimes = (_theaterId) => {
 }
 
 bot.on('message',function(event){
-          event.reply(showtimePromise);
+          event.reply(getShowtimes);
         });
 // import Crawler from 'js-crawler'
 // import Cheerio from 'cheerio'
