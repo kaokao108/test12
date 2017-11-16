@@ -139,18 +139,18 @@ var server = app.listen(process.env.PORT || 8080, function() {
 // function _japan() {
   // clearTimeout(timer2);
   request({
-    url: "http://www.atmovies.com.tw/showtime/t02a01/a02/",
+    url: "http://www.vscinemas.com.tw/visPrintShowTimes.aspx?cid=TP&visLang=2",
     method: "GET"
   }, function(error, response, body) {
     if (error || !body) {
       return;
     } else {
       var $ = cheerio.load(body);
-      var result = [];
-      var target = $("li.filmTitle");
-      for(var i=0;i<target.length;i++) {
-      result.push($(target[i]).text());
-       }
+      
+      var target = $(".PrintShowTimesFilm");
+      // for(var i=0;i<target.length;i++) {
+      // result.push($(target[i]).text());
+      //  }
       // var target2 = $(".PrintShowTimesDay");
       // var target3 = $(".PrintShowTimesSession")
       // console.log(target[14].children[0].data);
@@ -161,7 +161,7 @@ var server = app.listen(process.env.PORT || 8080, function() {
       // for(var i=0 ; i<titles.length ; i++) {
       //   result.push($(titles[i]).text());
       bot.on('message',function(event){
-          event.reply(result);
+          event.reply(target);
         });
       // if (jp > 0) {
        //  bot.on('message',function(event){
