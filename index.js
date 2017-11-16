@@ -96,6 +96,7 @@ var getShowtimes = (_theaterId) => {
     })
   })
   return showtimePromise
+}
 //   bot.on('message',function(event){
 //           event.reply(showtimePromise);
 //         });
