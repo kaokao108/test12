@@ -35,7 +35,7 @@ var server = app.listen(process.env.PORT || 8080, function() {
 });
 
 
-const getShowtimes = (_theaterId) => {
+var getShowtimes = (_theaterId) => {
   // const js-crawler = require('js-crawler');
   const crawler = new Crawler().configure({ maxRequestsPerSecond: 10 })
   const showtimePromise = new Promise((resolve, reject) => {
