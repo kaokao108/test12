@@ -41,7 +41,7 @@ var getShowtimes = (_theaterId) => {
   const showtimePromise = new Promise((resolve, reject) => {
     crawler.crawl({
       url: `http://www.vscinemas.com.tw/visPrintShowTimes.aspx?cid=${_theaterId}&visLang=2`,
-      success: (page) => {
+      success: function(page) => {
         const html = page.content.toString()
         const $ = Cheerio.load(html)
         let tables = $('.PrintShowTimesFilm').parent().parent().parent().find('table')
@@ -84,19 +84,22 @@ var getShowtimes = (_theaterId) => {
 
         })
         resolve(showtimes)
+         bot.on('message',function(event){
+          event.reply(showtime);
+        });
 
       },
-      failure: (page) => {
+      failure: function(page) => {
         console.log(`Get Showtimes Failed on theater: ${_theaterId}`)
         reject([])
       }
     })
   })
   return showtimePromise
-  bot.on('message',function(event){
-          event.reply(showtimePromise);
-        });
-}
+//   bot.on('message',function(event){
+//           event.reply(showtimePromise);
+//         });
+// }
 
 // bot.on('message',function(event){
 //           event.reply(getShowtimes);
