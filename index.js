@@ -93,12 +93,14 @@ var getShowtimes = (_theaterId) => {
     })
   })
   return showtimePromise
-
-}
-
-bot.on('message',function(event){
+  bot.on('message',function(event){
           event.reply(getShowtimes);
         });
+}
+
+// bot.on('message',function(event){
+//           event.reply(getShowtimes);
+//         });
 // import Crawler from 'js-crawler'
 // import Cheerio from 'cheerio'
 // import _ from 'lodash'
